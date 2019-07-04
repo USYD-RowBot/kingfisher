@@ -94,9 +94,9 @@ while not rospy.is_shutdown():
 
     mag_msg= MagneticField()
     mag_msg.header=h
-    mag_msg.magnetic_field.x=m9m[0]
-    mag_msg.magnetic_field.y=m9m[1]
+    mag_msg.magnetic_field.x=m9m[0]-12.5
+    mag_msg.magnetic_field.y=m9m[1]+2
     mag_msg.magnetic_field.z=m9m[2]
     mag_pub.publish(mag_msg)
-    
+
     rate.sleep()
