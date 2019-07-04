@@ -1,0 +1,15 @@
+<launch>
+    <node name="remote_control_handler" pkg="remote_control" type="remote_bridge.py" output="screen">
+        <param name="topic_out0" value="middle"/>
+        <param name="channel_out_max0" value="100"/>
+        <param name="channel_out_min0" value="-100"/>
+    </node>
+  <node name="servo" pkg="lowLevelHardware" type="servoFromTopic.py" launch-prefix="sudo -E">
+    <param name="srv_num" value="3"/>
+    <param name="val_max" value="100"/>
+    <param name="val_min" value="-100"/>
+    <param name="time_max" value="1.80"/>
+    <param name="time_min" value="1.20"/>
+    <param name="topic" value="middle"/>
+  </node>
+</launch>

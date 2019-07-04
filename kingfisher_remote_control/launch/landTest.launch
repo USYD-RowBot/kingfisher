@@ -1,0 +1,50 @@
+
+<launch>
+	<node name="remote_control_handler" pkg="remote_control" type="remote_bridge.py" output="screen">
+		<param name="topic_out0" value="axisY" />
+		<param name="topic_out2" value="axisX" />
+		<param name="channel_out_max0" value="100" />
+		<param name="channel_out_min0" value="-100" />
+		<param name="channel_out_max2" value="100" />
+		<param name="channel_out_min2" value="-100" />
+	</node>
+    <node name="skidsteerdrive" pkg="remote_control" type="skidSteerDrive.py" output="screen">
+		<param name="axis1" value="axisX" />
+		<param name="axis2" value="axisY" />
+		<param name="axis1Min" value="-100" />
+		<param name="axis2Max" value="100" />
+		<param name="axis1Ctr" value="0" />
+		<param name="axis2Min" value="-100" />
+		<param name="axis1Max" value="100" />
+		<param name="axis2Ctr" value="0" />
+		<param name="maxPower" value="100" />
+		<param name="minPower" value="-100" />
+		<param name="ctrPower" value="0" />
+		<param name="LeftMotorChannel" value="left" />
+		<param name="RightMotorChannel" value="right" />
+	</node>
+	<node name="thrusterLeft" pkg="lowLevelHardware" type="multiServoClient.py">
+		<param name="srv_num" value="0" />
+		<param name="val_max" value="100" />
+		<param name="val_min" value="-100" />
+		<param name="time_max" value="1.55" />
+		<param name="time_min" value="1.45" />
+		<param name="topic" value="left" />
+		<param name="topicOut" value="servo0" />
+		<param name="prime" value="true" />
+	</node>
+	<node name="thrusterRight" pkg="lowLevelHardware" type="multiServoClient.py">
+		<param name="srv_num" value="1" />
+		<param name="val_max" value="100" />
+		<param name="val_min" value="-100" />
+		<param name="time_max" value="1.55" />
+		<param name="time_min" value="1.45" />
+		<param name="topic" value="right" />
+		<param name="topicOut" value="servo1" />
+		<param name="prime" value="true" />
+	</node>
+	<node name="servoController" pkg="lowLevelHardware" type="multiServoFromTopic.py">
+		<param name="servoTopic0" value="servo0" />
+		<param name="servoTopic1" value="servo1" />
+	</node>
+</launch>

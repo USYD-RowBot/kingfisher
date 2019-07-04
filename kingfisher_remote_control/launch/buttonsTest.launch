@@ -1,0 +1,23 @@
+
+<launch>
+	<node name="remote_control_handler" pkg="remote_control" type="remote_bridge.py" output="screen">
+		<param name="topic_out0" value="chn0" />
+		<param name="topic_out1" value="chn1" />
+		<param name="topic_out2" value="chn2" />
+		<param name="topic_out3" value="chn3" />
+		<param name="topic_out4" value="chn4" />
+		<param name="topic_out5" value="chn5" />
+		<param name="channel_out_max0" value="100" />
+		<param name="channel_out_min0" value="-100" />
+		<param name="channel_out_max1" value="100" />
+		<param name="channel_out_min1" value="-100" />
+		<param name="channel_out_max2" value="100" />
+		<param name="channel_out_min2" value="-100" />
+		<param name="channel_out_max3" value="100" />
+		<param name="channel_out_min3" value="-100" />
+		<param name="channel_out_max4" value="100" />
+		<param name="channel_out_min4" value="-100" />
+		<param name="channel_out_max5" value="100" />
+		<param name="channel_out_min5" value="-100"/>
+	</node>
+</launch>

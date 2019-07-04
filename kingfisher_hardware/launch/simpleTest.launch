@@ -1,0 +1,10 @@
+<launch>
+  <node name="left_thruster" pkg="lowLevelHardware" type="servoFromTopic.py">
+    <param name="srv_num" value="0"/>
+    <param name="val_max" value="100"/>
+    <param name="val_min" value="-100"/>
+    <param name="time_max" value="1.00"/>
+    <param name="time_max" value="-1.00"/>
+    <param name="topic" value="thruster"/>
+  </node>
+</launch>

@@ -1,0 +1,28 @@
+<launch>
+	<node name="thrusterLeft" pkg="lowLevelHardware" type="multiServoClient.py" >
+    <param name="srv_num" value="0"/>
+    <param name="val_max" value="100"/>
+    <param name="val_min" value="-100"/>
+    <param name="time_max" value="1.60"/>
+    <param name="time_min" value="1.40"/>
+    <param name="topic" value="left"/>
+	<param name="topicOut" value="servo0"/>
+	<param name="prime" value="true"/>
+  </node>
+  
+
+  <node name="thrusterRight" pkg="lowLevelHardware" type="multiServoClient.py" >
+    <param name="srv_num" value="1"/>
+    <param name="val_max" value="100"/>
+    <param name="val_min" value="-100"/>
+    <param name="time_max" value="1.60"/>
+    <param name="time_min" value="1.40"/>
+    <param name="topic" value="right"/>
+	<param name="topicOut" value="servo1"/>
+	<param name="prime" value="true"/>
+  </node>
+  <node name="servoController" pkg="lowLevelHardware" type="multiServoFromTopic.py" >
+    <param name="servoTopic0" value="servo0"/>
+    <param name="servoTopic1" value="servo1"/>
+  </node>
+</launch>

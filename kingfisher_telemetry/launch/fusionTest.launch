@@ -1,0 +1,10 @@
+<launch>
+	<node name="imu" pkg="telemetry" type="IMU.py" output="screen">
+         <param name="imuChannel" value="imu_raw"/>
+	</node>
+	<node name="gps" pkg="telemetry" type="GPS.py" output="screen">
+<param name="topic" value="gps"/>
+</node>
+	<node name="fusiontest" pkg="telemetry" type="fusiontest.py" output="screen">
+	</node>
+</launch>

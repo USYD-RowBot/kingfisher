@@ -1,0 +1,77 @@
+<launch>
+	<node name="remote_control_handler" pkg="remote_control" type="remote_bridge.py" output="screen">
+		<param name="topic_out0" value="rc_axisY" />
+		<param name="topic_out2" value="rc_axisX" />
+		<param name="topic_out4" value="rc_switch" />
+		<param name="topic_out5" value="point_switch" />
+		<param name="channel_out_max0" value="100" />
+		<param name="channel_out_min0" value="-100" />
+		<param name="channel_out_max2" value="100" />
+		<param name="channel_out_min2" value="-100" />
+		<param name="channel_max4" value="1159" />
+		<param name="channel_min4" value="1841" />
+		<param name="channel_out_max4" value="1" />
+		<param name="channel_out_min4" value="-1" />
+		<param name="channel_out_max5" value="1" />
+		<param name="channel_out_min5" value="-1" />
+	</node>
+    <node name="skidsteerdrive" pkg="remote_control" type="skidSteerDrive.py" output="screen">
+		<param name="axis1" value="rc_axisX" />
+		<param name="axis2" value="rc_axisY" />
+		<param name="axis1Min" value="-100" />
+		<param name="axis2Max" value="100" />
+		<param name="axis1Ctr" value="0" />
+		<param name="axis2Min" value="-100" />
+		<param name="axis1Max" value="100" />
+		<param name="axis2Ctr" value="0" />
+		<param name="maxPower" value="100" />
+		<param name="minPower" value="-100" />
+		<param name="ctrPower" value="0" />
+		<param name="LeftMotorChannel" value="mleft" />
+		<param name="RightMotorChannel" value="mright" />
+	</node>
+	<node name="returnToPoint" pkg="remote_control" type="switchController.py" output="screen">
+		<param name="switchChannel" value="point_switch"/>
+		<param name="GPSChannel" value="GPS"/>
+		<param name="compassChannel" value="compass"/>
+		<param name="outputLeft" value="autoleft"/>
+		<param name="outputRight" value="autoright"/>
+	</node>
+	<node name="switchController" pkg="remote_control" type="switchController.py" output="screen">
+		<param name="switchChannel" value="rc_switch"/>
+		<param name="manualLeft" value="mleft"/>
+		<param name="manualRight" value="mright"/>
+		<param name="autoLeft" value="autoleft"/>
+		<param name="autoRight" value="autoright"/>
+		<param name="motorLeft" value="mtleft"/>
+		<param name="motorRight" value="mtright"/>
+		<param name="prime" value="true"/>
+		<param name="primeChannel" value="prime"/>
+		<param name="switchChannel" value="rc_switch"/>
+	</node>
+
+	<node name="thrusterLeft" pkg="lowLevelHardware" type="multiServoClient.py">
+		<param name="srv_num" value="0" />
+		<param name="val_max" value="100" />
+		<param name="val_min" value="-100" />
+		<param name="time_max" value="1.60" />
+		<param name="time_min" value="1.40" />
+		<param name="topic" value="mtleft" />
+		<param name="topicOut" value="servo0" />
+		<param name="prime" value="true" />
+	</node>
+	<node name="thrusterRight" pkg="lowLevelHardware" type="multiServoClient.py">
+		<param name="srv_num" value="1" />
+		<param name="val_max" value="100" />
+		<param name="val_min" value="-100" />
+		<param name="time_max" value="1.60" />
+		<param name="time_min" value="1.40" />
+		<param name="topic" value="mtright" />
+		<param name="topicOut" value="servo1" />
+		<param name="prime" value="true" />
+	</node>
+	<node name="servoController" pkg="lowLevelHardware" type="multiServoFromTopic.py">
+		<param name="servoTopic0" value="servo0" />
+		<param name="servoTopic1" value="servo1" />
+	</node>
+</launch>
