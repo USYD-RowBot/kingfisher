@@ -37,6 +37,7 @@ from sensor_msgs.msg import Imu
 from sensor_msgs.msg import MagneticField
 from geometry_msgs.msg import Vector3
 from std_msgs.msg import Header
+from tf.transformations import euler_from_quaternion, quaternion_from_euler
 
 navio.util.check_apm()
 
@@ -82,8 +83,17 @@ while not rospy.is_shutdown():
     h=Header()
     h.stamp=rospy.Time.now()
     m9a, m9g, m9m = imu.getMotion9()
+
+    yaw = math.atan2(mag_msg.magnetic_field.y=m9m[1]+2,mag_msg.magnetic_field.x=m9m[0]-12.5)
+    quat = quaternion_from_euler (0, 0,yaw)
+
     imu_msg = Imu()
     imu_msg.header=h
+    imu_msg.orientation.x = quat[0];
+    imu_msg.orientation.y = quat[1];
+    imu_msg.orientation.z = quat[2];
+    imu_msg.orientation.w = quat[3];
+
     imu_msg.angular_velocity.x=m9g[0]
     imu_msg.angular_velocity.y=m9g[1]
     imu_msg.angular_velocity.z=m9g[2]
