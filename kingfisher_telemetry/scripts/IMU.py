@@ -67,8 +67,8 @@ imu.initialize()
 
 rospy.sleep(1)
 rate = rospy.Rate(10)
-imu_pub = rospy.Publisher(IMU_CHANNEL, Imu)
-mag_pub = rospy.Publisher(MAG_CHANNEL, MagneticField)
+imu_pub = rospy.Publisher(IMU_CHANNEL, Imu,queue_size = 10)
+mag_pub = rospy.Publisher(MAG_CHANNEL, MagneticField,queue_size = 10)
 while not rospy.is_shutdown():
     # imu.read_all()
     # imu.read_gyro()
