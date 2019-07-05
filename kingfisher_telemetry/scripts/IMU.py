@@ -33,6 +33,7 @@ import sys
 import navio.mpu9250
 import navio.util
 import rospy
+import math
 from sensor_msgs.msg import Imu
 from sensor_msgs.msg import MagneticField
 from geometry_msgs.msg import Vector3
