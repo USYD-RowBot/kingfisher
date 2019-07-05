@@ -84,7 +84,7 @@ while not rospy.is_shutdown():
     h.stamp=rospy.Time.now()
     m9a, m9g, m9m = imu.getMotion9()
 
-    yaw = math.atan2(mag_msg.magnetic_field.y=m9m[1]+2,mag_msg.magnetic_field.x=m9m[0]-12.5)
+    yaw = math.atan2(m9m[1]+2,m9m[0]-12.5)
     quat = quaternion_from_euler (0, 0,yaw)
 
     imu_msg = Imu()
