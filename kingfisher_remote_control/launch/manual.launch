@@ -48,7 +48,7 @@
 		<param name="time_max" value="1.60" />
 		<param name="time_min" value="1.40" />
 		<param name="topic" value="mtleft" />
-		<param name="topicOut" value="servo0" />
+		<param name="topicOut" value="servo1" />
 		<param name="prime" value="true" />
 	</node>
 	<node name="thruster_right" pkg="kingfisher_hardware" type="multi_servo_client.py">
@@ -58,7 +58,7 @@
 		<param name="time_max" value="1.60" />
 		<param name="time_min" value="1.40" />
 		<param name="topic" value="mtright" />
-		<param name="topicOut" value="servo1" />
+		<param name="topicOut" value="servo0" />
 		<param name="prime" value="true" />
 	</node>
 	<node name="servo_controller" pkg="kingfisher_hardware" type="multi_servo_from_topic.py">
