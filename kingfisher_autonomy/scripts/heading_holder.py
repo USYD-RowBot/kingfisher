@@ -11,7 +11,7 @@ class Node():
         self.current_heading = 0
         self.left = 0
         self.right = 0
-        self.desired_heading = 0 #Radianns
+        self.desired_heading = math.radians(-100) #Radianns
         self.yaw_rate = 0
 
     def imu_callback(self,imu_msg):
@@ -33,12 +33,12 @@ if __name__=="__main__":
     pub_right = rospy.Publisher("right", Float32, queue_size = 10)
     rate = rospy.Rate(20)
     while not rospy.is_shutdown():
-        Kp = 500
-        Kd = 50
+        Kp = 200
+        Kd = 150
         err = node.current_heading - node.desired_heading
         #dt = node.current_heading - previous_heading
-        node.left = err*K + node.yaw_rate * Kd
-        node.right = -err*K - node.yaw_rate*Kd
+        node.left = err*Kp + node.yaw_rate * Kd
+        node.right = -err*Kp - node.yaw_rate*Kd
 
 
         if (node.left>100):

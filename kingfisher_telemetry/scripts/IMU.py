@@ -85,9 +85,16 @@ while not rospy.is_shutdown():
     h.stamp=rospy.Time.now()
     m9a, m9g, m9m = imu.getMotion9()
 
-    yaw = math.atan2(m9m[1]+2,m9m[0]-12.5)
-    quat = quaternion_from_euler (0, 0,yaw)
+    mag_msg= MagneticField()
+    mag_msg.header=h
+    mag_msg.magnetic_field.x=(m9m[0])
+    mag_msg.magnetic_field.y=(m9m[1])
+    mag_msg.magnetic_field.z=(m9m[2])
+    mag_pub.publish(mag_msg)
 
+    yaw = math.atan2(mag_msg.magnetic_field.y+1.5,mag_msg.magnetic_field.x-18.9)
+    quat = quaternion_from_euler (0, 0,yaw)
+    print("YAW:",math.degrees(yaw))
     imu_msg = Imu()
     imu_msg.header=h
     imu_msg.orientation.x = quat[0];
@@ -103,11 +110,5 @@ while not rospy.is_shutdown():
     imu_msg.linear_acceleration.z=m9a[2]
     imu_pub.publish(imu_msg)
 
-    mag_msg= MagneticField()
-    mag_msg.header=h
-    mag_msg.magnetic_field.x=m9m[0]-12.5
-    mag_msg.magnetic_field.y=m9m[1]+2
-    mag_msg.magnetic_field.z=m9m[2]
-    mag_pub.publish(mag_msg)
-
+   
     rate.sleep()
