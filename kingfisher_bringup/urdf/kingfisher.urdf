@@ -1,0 +1,15 @@
+<robot name="kingfisher">
+  <link name="gps" />
+  <link name="imu" />
+  <link name="base_link" />
+
+  <joint name="joint1" type="fixed">
+    <parent link="base_link"/>
+    <child link="gps"/>
+  </joint>
+
+  <joint name="joint2" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu"/>
+  </joint>
+</robot>
