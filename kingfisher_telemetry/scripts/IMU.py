@@ -33,10 +33,12 @@ import sys
 import navio.mpu9250
 import navio.util
 import rospy
+import math
 from sensor_msgs.msg import Imu
 from sensor_msgs.msg import MagneticField
 from geometry_msgs.msg import Vector3
 from std_msgs.msg import Header
+from tf.transformations import euler_from_quaternion, quaternion_from_euler
 
 navio.util.check_apm()
 
@@ -65,8 +67,8 @@ imu.initialize()
 
 rospy.sleep(1)
 rate = rospy.Rate(10)
-imu_pub = rospy.Publisher(IMU_CHANNEL, Imu)
-mag_pub = rospy.Publisher(MAG_CHANNEL, MagneticField)
+imu_pub = rospy.Publisher(IMU_CHANNEL, Imu,queue_size = 10)
+mag_pub = rospy.Publisher(MAG_CHANNEL, MagneticField,queue_size = 10)
 while not rospy.is_shutdown():
     # imu.read_all()
     # imu.read_gyro()
@@ -82,8 +84,24 @@ while not rospy.is_shutdown():
     h=Header()
     h.stamp=rospy.Time.now()
     m9a, m9g, m9m = imu.getMotion9()
+
+    mag_msg= MagneticField()
+    mag_msg.header=h
+    mag_msg.magnetic_field.x=(m9m[0])
+    mag_msg.magnetic_field.y=(m9m[1])
+    mag_msg.magnetic_field.z=(m9m[2])
+    mag_pub.publish(mag_msg)
+
+    yaw = math.atan2(mag_msg.magnetic_field.y+1.5,mag_msg.magnetic_field.x-18.9)
+    quat = quaternion_from_euler (0, 0,yaw)
+    print("YAW:",math.degrees(yaw))
     imu_msg = Imu()
     imu_msg.header=h
+    imu_msg.orientation.x = quat[0];
+    imu_msg.orientation.y = quat[1];
+    imu_msg.orientation.z = quat[2];
+    imu_msg.orientation.w = quat[3];
+
     imu_msg.angular_velocity.x=m9g[0]
     imu_msg.angular_velocity.y=m9g[1]
     imu_msg.angular_velocity.z=m9g[2]
@@ -92,11 +110,5 @@ while not rospy.is_shutdown():
     imu_msg.linear_acceleration.z=m9a[2]
     imu_pub.publish(imu_msg)
 
-    mag_msg= MagneticField()
-    mag_msg.header=h
-    mag_msg.magnetic_field.x=m9m[0]
-    mag_msg.magnetic_field.y=m9m[1]
-    mag_msg.magnetic_field.z=m9m[2]
-    mag_pub.publish(mag_msg)
-    
+   
     rate.sleep()

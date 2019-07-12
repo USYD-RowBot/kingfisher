@@ -41,7 +41,7 @@ if (PRIME_REQUIRED):
     #priming done!
 
 def callback(data):
-    scaled=data.data;
+    scaled=-data.data;
     # clip the range
     if (scaled>PWM_MAX):
         scaled=PWM_MAX

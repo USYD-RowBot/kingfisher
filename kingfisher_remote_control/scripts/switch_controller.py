@@ -82,5 +82,3 @@ primepub=rospy.Publisher(primerChannel, Bool, queue_size=10)
 
 
 rospy.spin()
-    
-    
