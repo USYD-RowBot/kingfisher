@@ -9,7 +9,7 @@ from std_msgs.msg import Header
 
 # Initialise ros
 rospy.init_node('gps',anonymous=True)
-OUTPUT_TOPIC = rospy.get_param("~topic",'GPS')
+OUTPUT_TOPIC = rospy.get_param("~topic",'gps')
 publisher=rospy.Publisher(OUTPUT_TOPIC,NavSatFix,queue_size=10)
 
 # stuff i copied from navio code
