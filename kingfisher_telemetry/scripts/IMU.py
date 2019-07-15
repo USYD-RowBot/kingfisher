@@ -83,6 +83,7 @@ while not rospy.is_shutdown():
     # time.sleep(0.1)
     h=Header()
     h.stamp=rospy.Time.now()
+    h.frame_id="imu"
     m9a, m9g, m9m = imu.getMotion9()
 
     mag_msg= MagneticField()

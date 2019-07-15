@@ -57,6 +57,7 @@ while not rospy.is_shutdown():
         components=search(" Longitude={:d} Latitude={:d} Height={:d}",outstr)
         h=Header()
         h.stamp=rospy.Time.now()
+        h.frame_id="gps"
         navmsg = NavSatFix()
         navmsg.header=h
         navmsg.latitude=float(components[1])/10000000.0
