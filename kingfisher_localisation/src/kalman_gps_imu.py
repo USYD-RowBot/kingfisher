@@ -21,21 +21,21 @@ class Node():
         self.long = data.longitude
         R = 63781000 #Radius of Earth Metres
         pi=3.14159265359
-        delta_lat = self.lat-self.datum[0]
-        delta_long = self.lat-self.datum[1]
-        x = (delta_lat/360 )* 2*pi*R
-        y = (delta_lat/360 )* 2*pi*R
-        print(x,y)
+        # delta_lat = self.lat-self.datum[0]
+        # delta_long = self.lat-self.datum[1]
+        # x = (delta_lat/360 )* 2*pi*R
+        # y = (delta_lat/360 )* 2*pi*R
+        # print(x,y)
 
     def imu_callback(self,data):
-        self.orientation = data.orientation
-        print(orientation)
+        # self.orientation = data.orientation
+        # print(orientation)
 
 
 
 
 if __name__ == "__main__":
-    rospy.init_node("simple_gps_to_odom")
+    rospy.init_node("kalman_gps_to_odom")
     rate = rospy.Rate(20)
     node = Node()
     node.publius
