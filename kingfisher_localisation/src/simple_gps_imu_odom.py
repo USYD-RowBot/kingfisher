@@ -2,6 +2,7 @@
 import rospy
 from sensor_msgs.msg import Imu
 from sensor_msgs.msg import NavSatFix
+from nav_msgs.msg import Odometry
 from math import *
 
 class Node():
@@ -12,24 +13,33 @@ class Node():
         self.x = 0
         self.y = 0
         self.orientation = None
-        self.odom_pub = None
+
+        self.odom_pub = rospy.Publisher('odom',Odometry,queue_size = 10)
+
 
 
 
     def gps_callback(self,data):
         self.lat = data.latitude
         self.long = data.longitude
-        R = 63781000 #Radius of Earth Metres
+        R = 6378100 #Radius of Earth Metres
         pi=3.14159265359
         delta_lat = self.lat-self.datum[0]
-        delta_long = self.lat-self.datum[1]
-        x = (delta_lat/360 )* 2*pi*R
+        delta_long = self.long-self.datum[1]
         y = (delta_lat/360 )* 2*pi*R
+        x = (delta_long/360 )* 2*pi*R
+        odom_msg=Odometry()
+        odom_msg.pose.pose.position.x = x
+        odom_msg.pose.pose.position.y = y
+        odom_msg.pose.pose.position.z = 0.0
+        odom_msg.pose.pose.orientation = self.orientation
+        odom_msg.header.frame_id = "odom"
+        self.odom_pub.publish(odom_msg)
         print(x,y)
 
     def imu_callback(self,data):
         self.orientation = data.orientation
-        print(orientation)
+        #print(orientation)
 
 
 
@@ -38,7 +48,7 @@ if __name__ == "__main__":
     rospy.init_node("simple_gps_to_odom")
     rate = rospy.Rate(20)
     node = Node()
-    node.publius
     rospy.Subscriber("gps",NavSatFix,node.gps_callback)
+    rospy.Subscriber("imu",Imu,node.imu_callback)
     while not rospy.is_shutdown():
             rate.sleep()
