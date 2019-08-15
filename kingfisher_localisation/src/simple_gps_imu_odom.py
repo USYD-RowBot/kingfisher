@@ -4,12 +4,13 @@ from sensor_msgs.msg import Imu
 from sensor_msgs.msg import NavSatFix
 from nav_msgs.msg import Odometry
 from math import *
+import pyproj
 
 class Node():
     def __init__(self):
         self.lat=0
         self.long = 0
-        self.datum=[-33.886731,151.1992591]
+        self.datum=[-33.839404,151.254627]
         self.x = 0
         self.y = 0
         self.orientation = None
@@ -24,10 +25,17 @@ class Node():
         self.long = data.longitude
         R = 6378100 #Radius of Earth Metres
         pi=3.14159265359
-        delta_lat = self.lat-self.datum[0]
-        delta_long = self.long-self.datum[1]
-        y = (delta_lat/360 )* 2*pi*R
-        x = (delta_long/360 )* 2*pi*R
+        #delta_lat = self.lat-self.datum[0]
+        #delta_long = self.long-self.datum[1]
+        #y = (delta_lat/360 )* 2*pi*R
+        #x = (delta_long/360 )* 2*pi*
+        #print(self.lat,self.long)
+
+        outProj = pyproj.Proj("+init=EPSG:4326")
+        crs="+proj=tmerc +lon_0={} +lat_0={} +units=m".format(self.datum[1],self.datum[0])
+        inp = pyproj.Proj(crs)
+        y,x = pyproj.transform(outProj,inp,self.long,self.lat)
+        #print(outProj)
         odom_msg=Odometry()
         odom_msg.pose.pose.position.x = x
         odom_msg.pose.pose.position.y = y
