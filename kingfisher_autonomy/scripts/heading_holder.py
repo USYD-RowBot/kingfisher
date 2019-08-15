@@ -39,16 +39,16 @@ if __name__=="__main__":
         #dt = node.current_heading - previous_heading
         node.left = err*Kp + node.yaw_rate * Kd
         node.right = -err*Kp - node.yaw_rate*Kd
+        max_s = 40
 
-
-        if (node.left>100):
-            node.left = 100
-        if (node.left<-100):
-            node.left = -100
-        if (node.right>100):
-            node.right = 100
-        if (node.right<-100):
-            node.right = -100
+        if (node.left>max_s):
+            node.left = max_s
+        if (node.left<-max_s):
+            node.left = -max_s
+        if (node.right>max_s):
+            node.right = max_s
+        if (node.right<-max_s):
+            node.right = -max_s
 
         pub_left.publish(node.left)
         pub_right.publish(node.right)

@@ -93,7 +93,7 @@ while not rospy.is_shutdown():
     mag_msg.magnetic_field.z=(m9m[2])
     mag_pub.publish(mag_msg)
 
-    yaw = math.atan2(mag_msg.magnetic_field.y+1.5,mag_msg.magnetic_field.x-18.9)
+    yaw = math.atan2(mag_msg.magnetic_field.y+1.5,mag_msg.magnetic_field.x-18.9)+1.507
     quat = quaternion_from_euler (0, 0,yaw)
     print("YAW:",math.degrees(yaw))
     imu_msg = Imu()

@@ -8,6 +8,7 @@ rospy.init_node("multiServoClient",anonymous=True)
 PWM_OUTPUT=rospy.get_param("~srv_num",0)
 PWM_MAX=rospy.get_param("~val_max",100.0)
 PWM_MIN=rospy.get_param("~val_min",0.0)
+INVERSE=rospy.get_param("~inverse",False)
 TIME_MAX=rospy.get_param("~time_max",2.00)# in ms
 TIME_MIN=rospy.get_param("~time_min",1.00)
 PRIME_REQUIRED=rospy.get_param("~prime",False)
@@ -41,7 +42,10 @@ if (PRIME_REQUIRED):
     #priming done!
 
 def callback(data):
-    scaled=-data.data;
+    if (INVERSE):
+        scaled=-data.data;
+    else:
+        scaled=data.data
     # clip the range
     if (scaled>PWM_MAX):
         scaled=PWM_MAX

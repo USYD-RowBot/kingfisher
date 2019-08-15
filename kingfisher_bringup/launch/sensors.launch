@@ -1,5 +1,5 @@
 <launch>
-    <include file="$(find kingfisher_remote_control)/launch/manual.launch"/>
+    
     <node name="imu_node" pkg="kingfisher_telemetry" type="IMU.py"/>
     <node name="gps_node" pkg="kingfisher_telemetry" type="GPS.py"/>
 </launch>

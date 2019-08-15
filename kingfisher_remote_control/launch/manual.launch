@@ -45,8 +45,9 @@
 		<param name="srv_num" value="0" />
 		<param name="val_max" value="100" />
 		<param name="val_min" value="-100" />
-		<param name="time_max" value="1.60" />
-		<param name="time_min" value="1.40" />
+		<param name="time_max" value="1.9" />
+		<param name="inverse" value="false"/>
+		<param name="time_min" value="1.1" />
 		<param name="topic" value="mtleft" />
 		<param name="topicOut" value="servo1" />
 		<param name="prime" value="true" />
@@ -55,8 +56,9 @@
 		<param name="srv_num" value="1" />
 		<param name="val_max" value="100" />
 		<param name="val_min" value="-100" />
-		<param name="time_max" value="1.60" />
-		<param name="time_min" value="1.40" />
+		<param name="inverse" value="true"/>
+		<param name="time_max" value="1.9" />
+		<param name="time_min" value="1.1" />
 		<param name="topic" value="mtright" />
 		<param name="topicOut" value="servo0" />
 		<param name="prime" value="true" />
