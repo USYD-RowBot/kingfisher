@@ -1,5 +1,5 @@
 <launch>
-	<node name="thrusterLeft" pkg="lowLevelHardware" type="multiServoClient.py" >
+	<node name="thrusterLeft" pkg="kingfisher_hardware" type="multi_servo_client.py" >
     <param name="srv_num" value="0"/>
     <param name="val_max" value="100"/>
     <param name="val_min" value="-100"/>
@@ -11,7 +11,7 @@
   </node>
   
 
-  <node name="thrusterRight" pkg="lowLevelHardware" type="multiServoClient.py" >
+  <node name="thrusterRight" pkg="kingfisher_hardware" type="multi_servo_client.py" >
     <param name="srv_num" value="1"/>
     <param name="val_max" value="100"/>
     <param name="val_min" value="-100"/>
@@ -21,7 +21,7 @@
 	<param name="topicOut" value="servo1"/>
 	<param name="prime" value="true"/>
   </node>
-  <node name="servoController" pkg="lowLevelHardware" type="multiServoFromTopic.py" >
+  <node name="servo_controller" pkg="kingfisher_hardware" type="multi_servo_from_topic.py" >
     <param name="servoTopic0" value="servo0"/>
     <param name="servoTopic1" value="servo1"/>
   </node>
