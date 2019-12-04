@@ -13,7 +13,7 @@
 		<param name="channel_out_max4" value="1" />
 		<param name="channel_out_min4" value="-1" />
 	</node>
-    <node name="skid_steer_drive" pkg="kingfisher_remote_control" type="skid_steer_drive.py" output="screen">
+    <node name="skidsteerdrive" pkg="kingfisher_remote_control" type="skid_steer_drive.py" output="screen">
 		<param name="axis1" value="rc_axisX" />
 		<param name="axis2" value="rc_axisY" />
 		<param name="axis1Min" value="-100" />
