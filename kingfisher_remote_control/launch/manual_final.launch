@@ -1,6 +1,6 @@
 
 <launch>
-	<node name="remote_control_handler" pkg="remote_control" type="remote_bridge.py" output="screen">
+	<node name="remote_control_handler" pkg="kingfisher_remote_control" type="remote_bridge.py" output="screen">
 		<param name="topic_out0" value="rc_axisY" />
 		<param name="topic_out2" value="rc_axisX" />
 		<param name="topic_out4" value="rc_switch" />
@@ -13,7 +13,7 @@
 		<param name="channel_out_max4" value="1" />
 		<param name="channel_out_min4" value="-1" />
 	</node>
-    <node name="skidsteerdrive" pkg="remote_control" type="skidSteerDrive.py" output="screen">
+    <node name="skidsteerdrive" pkg="kingfisher_remote_control" type="skidSteerDrive.py" output="screen">
 		<param name="axis1" value="rc_axisX" />
 		<param name="axis2" value="rc_axisY" />
 		<param name="axis1Min" value="-100" />
@@ -28,7 +28,7 @@
 		<param name="LeftMotorChannel" value="mleft" />
 		<param name="RightMotorChannel" value="mright" />
 	</node>
-	<node name="switchController" pkg="remote_control" type="switchController.py" output="screen">
+	<node name="switchController" pkg="kingfisher_remote_control" type="switchController.py" output="screen">
 		<param name="switchChannel" value="rc_switch"/>
 		<param name="manualLeft" value="mleft"/>
 		<param name="manualRight" value="mright"/>
@@ -41,7 +41,7 @@
 		<param name="switchChannel" value="rc_switch"/>
 	</node>
 
-	<node name="thrusterLeft" pkg="lowLevelHardware" type="multiServoClient.py">
+	<node name="thrusterLeft" pkg="kingfisher_hardware" type="multiServoClient.py">
 		<param name="srv_num" value="0" />
 		<param name="val_max" value="100" />
 		<param name="val_min" value="-100" />
@@ -51,7 +51,7 @@
 		<param name="topicOut" value="servo0" />
 		<param name="prime" value="true" />
 	</node>
-	<node name="thrusterRight" pkg="lowLevelHardware" type="multiServoClient.py">
+	<node name="thrusterRight" pkg="kingfisher_hardware" type="multiServoClient.py">
 		<param name="srv_num" value="1" />
 		<param name="val_max" value="100" />
 		<param name="val_min" value="-100" />
@@ -61,7 +61,7 @@
 		<param name="topicOut" value="servo1" />
 		<param name="prime" value="true" />
 	</node>
-	<node name="servoController" pkg="lowLevelHardware" type="multiServoFromTopic.py">
+	<node name="servoController" pkg="kingfisher_hardware" type="multiServoFromTopic.py">
 		<param name="servoTopic0" value="servo0" />
 		<param name="servoTopic1" value="servo1" />
 	</node>
